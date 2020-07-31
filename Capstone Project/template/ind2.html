@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{db.main[1]}}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+
+</head>
+<body>
+    <div class='ui container' style="text-align: center;">
+        <img src={{db.main[0]}} style="height: 250px; width: 250px;"><br>
+        <h1 style="font-size: 500%;">{{db.main[1]}}</h1>
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

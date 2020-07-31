@@ -1,0 +1,104 @@
+{% extends "ind2.html" %}
+
+{% block content %}
+
+<script>
+    $(document).ready(function() {
+        
+        $('.Heart').click(function(){
+            var v_id = $(this).attr('v_id');
+            $('#' + v_id).text('Liked');
+
+            var vertex = $(this).attr('vertex')
+
+            $('#heart' + v_id).attr('style', 'color : red')
+
+            var Likes = Number($('#like' + v_id).text());
+            $('#like' + v_id).text(Likes + 1);
+
+                req = $.ajax({
+                url: '/update',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ vertex : vertex, key : v_id}),
+                dataType: 'json'
+            });
+
+            
+        });
+
+
+        $('.like').click(function(){
+            var id = $(this).attr('id');
+            $('#' + id).text('Liked');
+
+            var Likes = Number($('#like' + id).text());
+            $('#like' + id).text(Likes + 1);
+
+            req = $.ajax({
+                url: '/update',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ vertex : 'resources', key : id}),
+                dataType: 'json'
+            });
+
+
+        });
+    });
+</script>
+
+{% for i in db.element %}
+
+<div class="ui segment">
+    <div class="ui massive horizontal divided list">
+        <div class=" ui item">
+    
+            <div class="ui labeled button" tabindex="0">
+                <div class="ui red button">
+                <i class="heart icon"></i>
+                <a class="like" style="color: White; font-size: 15px;" id="{{i[0]}}">
+                    Like
+                </a>
+                </div>
+                <a class="ui basic red left pointing label" style="font-size: 15px;" id="like{{i[0]}}">
+                {{i[1]}}
+                </a>
+            </div>
+
+        </div>
+        <div class="ui item">
+           <b style="font-size: 35px; padding-right: 20px;" > <a style="color: black;" href={{i[2]}}> {{i[0]}} </a> </b>
+           <button class="ui green button"> <a style="color: white;" href={{i[2]}}>{{i[3]}} </a></button>
+           <br><br>
+        
+        <div class=" ui item" style="display: inline-block; padding-right: 50px;">
+            <h1>Concepts Well<br> Explained</h1>
+            <a class='Heart' v_id={{i[4]}} vertex='q1'>
+                <i class="heart icon" id="heart{{i[4]}}" style="color: grey;" ></i>
+            </a>
+            <a style="color: Black;" id={{i[4]}} > Like </a> <a style="color: Black;" id= "like{{i[4]}}"> {{i[5]}}</a>
+        </div>
+        
+        <div class=" ui item" style="display: inline-block; padding-right: 50px;">
+            <h1>Course Depth <br> and Coverage</h1>
+            <a class='Heart' v_id={{i[6]}} vertex='q2'>
+                <i class="heart icon" id="heart{{i[6]}}" style="color: grey;" ></i>
+            </a>
+            <a style="color: Black;" id={{i[6]}}> Like </a> <a style="color: Black;" id="like{{i[6]}}"> {{i[7]}}</a>
+        </div>
+        
+        <div class=" ui item" style="display: inline-block; padding-right: 50px;">
+            <h1>Quality of<br> the Content</h1>
+            <a class='Heart' v_id={{i[8]}} vertex='q3' >
+                <i class="heart icon" id="heart{{i[8]}}" style="color: grey;"></i>
+            </a>
+            <a style="color: Black;" id={{i[8]}}> Like </a> <a style="color: Black;" id="like{{i[8]}}"> {{i[9]}}</a>
+        </div>
+        
+    </div>
+    </div>
+</div> <br>
+
+{% endfor %}
+{% endblock %}

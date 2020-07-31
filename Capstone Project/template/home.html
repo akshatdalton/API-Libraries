@@ -1,0 +1,25 @@
+{% extends "ind1.html" %}
+
+{% block content %}
+
+{% set icon_list = db.get_icon() %}
+{% set name_list = db.get_name() %}
+
+{% for i in range(0, (icon_list|length)) %}
+
+<a  href="{{name_list[i]}}">
+<span style="padding-left: 40px;">
+<div class="ui card" style="display:inline-block;">
+    <div class="image">
+      <img src={{icon_list[i]}} style="height: 250px; width: 280px;">
+    </div>
+    <div class="content">
+      <a class="header" style="font-size: 250%; text-align: center;">{{name_list[i]}}</a>
+    </div>
+</div>
+</span>
+</a>
+
+{% endfor %}
+
+{% endblock %}
